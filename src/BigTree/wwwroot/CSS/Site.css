@@ -1,0 +1,94 @@
+﻿
+/*Site.css*/
+ body{
+
+     font-family: sans-serif;
+     font-size: 14px;
+     margin: 0;
+        
+}
+
+ label{
+
+     font-weight: bold;
+     display: block;
+ }
+
+
+ input {
+
+     width: 150px;
+ }
+
+
+input[type=text], input[type=password], textarea {
+    width: auto;
+}
+
+
+
+
+#main {
+
+    background-color: #eee;
+    padding: 4px;
+    margin: 0; 
+    
+
+}
+
+#footer {
+
+
+    background-color: #222;
+    color: #eee;
+    padding: 8px 5px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+}
+
+
+.headshot {
+
+    max-width: 60px;
+    border: 1px solid #222;
+    padding: 2px;
+}
+
+.menu {
+    font-size: 12px;
+}
+
+
+    .menu li {
+
+        list-style-type: none;
+    }
+
+    .menu li.active {
+
+        font-weight: bold;
+    }
+
+
+#sidebar {
+
+    background: #2a2c36;
+    color: #eee;
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    overflow: hidden;
+    left: 0;
+    margin: 0;
+
+
+}
+
+
+#wrapper-main {
+
+    margin: 0 0 0 250px;
+}
