@@ -74,7 +74,6 @@ input[type=text], input[type=password], textarea {
 
 
 #sidebar {
-
     background: #2a2c36;
     color: #eee;
     position: fixed;
@@ -83,12 +82,30 @@ input[type=text], input[type=password], textarea {
     overflow: hidden;
     left: 0;
     margin: 0;
-
-
+    -moz-transition: left ease .25s;
+    -o-transition: left ease .25s;
+    -webkit-transition: left ease .25s;
+    transition: left ease .25s;
 }
+
+    #sidebar.hide-sidebar {
+
+        left: -250px;
+        transition: left ease .25s;
+
+    }
 
 
 #wrapper-main {
 
     margin: 0 0 0 250px;
+    transition: margin-left ease .25s;
+
 }
+
+    #wrapper-main.hide-sidebar {
+
+        margin-left: 0;
+        transition: margin-left ease .25s;
+
+    }
