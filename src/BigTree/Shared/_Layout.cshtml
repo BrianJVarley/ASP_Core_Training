@@ -1,0 +1,45 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>The World - @ViewBag.Title</title>
+
+    <link rel="stylesheet" href="~/CSS/Site.css" />
+
+</head>
+
+<body>
+
+
+    <div id="sidebar">
+        <img src="~/Images/user-1.jpg" alt="headshot user" class="headshot" />
+        <span id="username">Brian Varley</span>
+        <ul class="menu">
+            <li class="active"><a asp-controller="App" asp-action="Index" href="#">Home</a></li>
+            <li><a asp-controller="App" asp-action="About" href="#">About</a></li>
+            <li><a asp-controller="App" asp-action="Contact" href="#">Contact</a></li>
+
+        </ul>
+
+    </div>
+
+    <div id="wrapper-main">
+        <div id="main">
+            <div>
+                <button id="sidebarToggle">Toggle Menu</button>
+            </div>
+            @RenderBody();
+        </div>
+        <div id="footer">
+            &copy; 2015 The World Ltd
+        </div>
+    </div>
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    @RenderSection("scripts", false);
+    <script type="text/javascript" src="~/JS/site.js"></script>
+
+
+</body>
+</html>
