@@ -40,7 +40,7 @@ namespace BigTree.Controllers.Web
 
             if(ModelState.IsValid)
             {
-                _mailService.SendMail(_config["MailSetting:ToAddress"], model.Email, "From BigTree", model.Message);
+                _mailService.SendMail(_config["MailSettings:ToAddress"], model.Email, "From BigTree", model.Message);
                 ModelState.Clear();
                 ViewBag.UserMessage = "Message Sent";
             }
