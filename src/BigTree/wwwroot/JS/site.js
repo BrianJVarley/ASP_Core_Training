@@ -30,18 +30,21 @@
 
 
     var $sidebarAndWrapper = $("#sidebar, #wrapper-main");
+    var $icon = $("#sidebarToggle i.glyphicon");
 
     $("#sidebarToggle").on("click", function () {
 
         $sidebarAndWrapper.toggleClass("hide-sidebar");
 
         if ($sidebarAndWrapper.hasClass("hide-sidebar")) {
-            $(this).text("Show Menu");
+            $icon.removeClass("glyphicon-chevron-left");
+            $icon.addClass("glyphicon-chevron-right");
 
         }
         else {
 
-            $(this).text("Hide Menu");
+            $icon.addClass("glyphicon-chevron-left");
+            $icon.removeClass("glyphicon-chevron-right");
         }
     });
 

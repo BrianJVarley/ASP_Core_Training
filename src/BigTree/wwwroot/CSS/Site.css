@@ -1,6 +1,6 @@
 ﻿
 /*Site.css*/
- body{
+ /*body{
 
      font-family: sans-serif;
      font-size: 14px;
@@ -23,12 +23,12 @@
 
 input[type=text], input[type=password], textarea {
     width: auto;
-}
+}*/
 
 
 
 
-#main {
+/*#main {
 
     background-color: #eee;
     padding: 4px;
@@ -47,7 +47,7 @@ input[type=text], input[type=password], textarea {
     bottom: 0;
     width: 100%;
 
-}
+}*/
 
 
 .headshot {
