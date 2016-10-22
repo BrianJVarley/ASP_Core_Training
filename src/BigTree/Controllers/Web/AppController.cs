@@ -2,6 +2,10 @@
 using BigTree.ViewModels;
 using BigTree.Services;
 using Microsoft.Extensions.Configuration;
+using BigTree.Models;
+using System.Linq;
+using Microsoft.Extensions.Logging;
+using System;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,18 +15,39 @@ namespace BigTree.Controllers.Web
     {
         private IMailService _mailService;
 
-        public IConfigurationRoot _config;
+        private IConfigurationRoot _config;
 
-        public AppController(IMailService mailService, IConfigurationRoot config)
+        private IWorldRepository _repository;
+        private ILogger _logger;
+
+
+
+
+        public AppController(IMailService mailService, IConfigurationRoot config, IWorldRepository repository, ILogger<AppController> logger)
         {
             _mailService = mailService;
             _config = config;
+            _repository = repository;
+            _logger = logger;
+
         }
 
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+
+            try
+            {
+                var data = _repository.GetAllTrips();
+                return View(data);
+
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"Failed to get trips in Index page: {ex.Message}");
+                return Redirect("/error");
+            }
+           
         }
 
         public IActionResult Contact()

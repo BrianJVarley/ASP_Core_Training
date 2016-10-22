@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using BigTree.Services;
+using BigTree.Models;
 
 namespace BigTree
 {
@@ -47,16 +48,29 @@ namespace BigTree
         
             }
 
+            services.AddDbContext<WorldContext>();
+            services.AddScoped<IWorldRepository, WorldRepository>(); //create once per request
+            services.AddTransient<WorldContextSeedData>();
+            services.AddLogging();
+            services.AddMvc();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
+            ILoggerFactory loggerFactory, WorldContextSeedData seeder)
         {
             loggerFactory.AddConsole();
 
             if(env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                loggerFactory.AddDebug(LogLevel.Information);
+
+            }
+            else
+            {
+                loggerFactory.AddDebug(LogLevel.Error);
 
             }
             //Take note of the order of usings,
@@ -73,6 +87,8 @@ namespace BigTree
                     );
 
             });
+
+            seeder.EnsureSeedData().Wait(); //can't call async within Configure..so use .Wait();
 
         }
     }
