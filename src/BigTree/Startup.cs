@@ -10,6 +10,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using BigTree.Services;
 using BigTree.Models;
+using Newtonsoft.Json.Serialization;
+using AutoMapper;
+using BigTree.ViewModels;
 
 namespace BigTree
 {
@@ -52,7 +55,11 @@ namespace BigTree
             services.AddScoped<IWorldRepository, WorldRepository>(); //create once per request
             services.AddTransient<WorldContextSeedData>();
             services.AddLogging();
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(config =>
+                {
+                    config.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                });
 
         }
 
@@ -60,6 +67,12 @@ namespace BigTree
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
             ILoggerFactory loggerFactory, WorldContextSeedData seeder)
         {
+
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<TripViewModel, Trip>();
+            });
+
             loggerFactory.AddConsole();
 
             if(env.IsDevelopment())
