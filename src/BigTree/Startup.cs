@@ -54,6 +54,7 @@ namespace BigTree
             services.AddDbContext<WorldContext>();
             services.AddScoped<IWorldRepository, WorldRepository>(); //create once per request
             services.AddTransient<WorldContextSeedData>();
+            services.AddTransient<GeoCoordsService>();
             services.AddLogging();
             services.AddMvc()
                 .AddJsonOptions(config =>
@@ -70,7 +71,9 @@ namespace BigTree
 
             Mapper.Initialize(config =>
             {
-                config.CreateMap<TripViewModel, Trip>();
+                config.CreateMap<TripViewModel, Trip>().ReverseMap();
+                config.CreateMap<StopViewModel, Stop>().ReverseMap();
+
             });
 
             loggerFactory.AddConsole();

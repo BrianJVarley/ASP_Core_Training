@@ -203,6 +203,7 @@
 --resource:"C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\obj\Debug\netcoreapp1.0\BigTreedotnet-compile.deps.json",BigTree.deps.json
 C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\Program.cs
 C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\Startup.cs
+C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\Controllers\Api\StopsController.cs
 C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\Controllers\Api\TripsController.cs
 C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\Controllers\Web\AppController.cs
 C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\Migrations\20161022101648_InitialDatabase.cs
@@ -215,6 +216,9 @@ C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\Models\
 C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\Models\WorldContextSeedData.cs
 C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\Models\WorldRepository.cs
 C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\Services\DebugMailService.cs
+C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\Services\GeoCoordsResult.cs
+C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\Services\GeoCoordsService.cs
 C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\Services\IMailService.cs
 C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\ViewModels\ContactViewModel.cs
+C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\ViewModels\StopViewModel.cs
 C:\Users\Brian\Documents\Visual Studio 2015\Projects\BigTree\src\BigTree\ViewModels\TripViewModel.cs

@@ -2,6 +2,7 @@
 using BigTree.Models;
 using BigTree.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,12 @@ namespace BigTree.Controllers.Api
     {
 
         private IWorldRepository _repository;
+        private ILogger<TripViewModel> _logger;
 
-        public TripsController(IWorldRepository repository)
+        public TripsController(IWorldRepository repository, ILogger<TripViewModel> logger)
         {
             this._repository = repository;
+            this._logger = logger;
         }
 
         [HttpGet("")]
@@ -32,7 +35,8 @@ namespace BigTree.Controllers.Api
             catch (Exception ex)
             {
                 //TODO Logging
-                return BadRequest("Something strange happened..");
+                _logger.LogError("Failed to get All Trips:" + ex);
+                return BadRequest("Error occurred");
 
             }
 
@@ -40,18 +44,25 @@ namespace BigTree.Controllers.Api
         }
 
         [HttpPost("")]
-        public IActionResult Post([FromBody]TripViewModel trip)
+        public async Task<IActionResult> Post([FromBody]TripViewModel trip)
         {
+
+
             if (ModelState.IsValid)
             {
                 //Save to DB
                 var newTrip = Mapper.Map<Trip>(trip);
-                return Created($"api/trips/{newTrip.Name}", Mapper.Map<TripViewModel>(newTrip));
+                _repository.AddTrip(newTrip);
 
+                if(await _repository.SaveChangesAsync()) //persist the dat here from context
+                {
+                    return Created($"api/trips/{newTrip.Name}", Mapper.Map<TripViewModel>(newTrip));
+                }
             }
 
-            return BadRequest(ModelState);
-            
+            return BadRequest("Failed to save trip");
+
+
         }
     }
 }
