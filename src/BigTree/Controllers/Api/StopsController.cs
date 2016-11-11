@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BigTree.Controllers.Api
 {
-    [Route("/api/{tripName}/stops")]
+    [Route("/api/trips/{tripName}/stops")]
     public class StopsController : Controller
     {
         private ILogger<StopsController> _logger;
@@ -56,8 +56,8 @@ namespace BigTree.Controllers.Api
 
                     if (await _repository.SaveChangesAsync())
                     {
-                        return Created($"/api/trips/" + tripName + "/stops/" + newStop.Name,
-                       AutoMapper.Mapper.Map<StopViewModel>(newStop));
+                        return Created($"/api/trips/{tripName}/stops/{newStop.Name}",
+                                 AutoMapper.Mapper.Map<StopViewModel>(newStop));
                     }
 
                 }
