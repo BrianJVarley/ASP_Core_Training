@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,16 +9,28 @@ namespace BigTree.Models
     public class WorldContextSeedData
     {
         private WorldContext _context;
+        private UserManager<WorldUser> _userManager;
 
-        public WorldContextSeedData(WorldContext context)
+        public WorldContextSeedData(WorldContext context, UserManager<WorldUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
 
         }
 
 
         public async Task EnsureSeedData()
         {
+
+            if(_userManager.FindByEmailAsync("brianvarley9@gmail.com") == null)
+            {
+                var user = new WorldUser()
+                {
+                    UserName = "brianvarley",
+                    Email = "brianvarley9@gmail.com"
+
+                };
+            }
 
             if(!_context.Trips.Any())
             {
@@ -26,7 +39,7 @@ namespace BigTree.Models
                 {
                     DateCreated = DateTime.UtcNow,
                     Name = "US Trip",
-                    UserName = "",
+                    UserName = "brianvarley",
                     Stops = new List<Stop>()
                     {
                         new Stop() {  Name = "Atlanta, GA", Arrival = new DateTime(2014, 6, 4), Latitude = 33.748995, Longitude = -84.387982, Order = 0 },

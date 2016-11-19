@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BigTree.Models;
 using BigTree.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace BigTree.Controllers.Api
 {
+    [Authorize]
     [Route("api/trips")]
     public class TripsController : Controller
     {
@@ -28,7 +30,7 @@ namespace BigTree.Controllers.Api
         {
             try
             {
-                var result = _repository.GetAllTrips();
+                var result = _repository.GetTripByUserName(this.User.Identity.Name);
                 return Ok(Mapper.Map<IEnumerable<TripViewModel>>(result));
 
             }
@@ -52,6 +54,9 @@ namespace BigTree.Controllers.Api
             {
                 //Save to DB
                 var newTrip = Mapper.Map<Trip>(trip);
+
+                newTrip.UserName = User.Identity.Name;
+
                 _repository.AddTrip(newTrip);
 
                 if(await _repository.SaveChangesAsync()) //persist the dat here from context

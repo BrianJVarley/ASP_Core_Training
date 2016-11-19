@@ -13,6 +13,9 @@ using BigTree.Models;
 using Newtonsoft.Json.Serialization;
 using AutoMapper;
 using BigTree.ViewModels;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BigTree
 {
@@ -56,11 +59,44 @@ namespace BigTree
             services.AddTransient<WorldContextSeedData>();
             services.AddTransient<GeoCoordsService>();
             services.AddLogging();
-            services.AddMvc()
-                .AddJsonOptions(config =>
+            services.AddMvc(config =>
                 {
-                    config.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    if(_env.IsProduction())
+                    {
+                        config.Filters.Add(new RequireHttpsAttribute()); //redirect to secure Https if PRO environment
+
+                    }
+                })
+                .AddJsonOptions(opt =>
+                {
+                    opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 });
+
+            services.AddIdentity<WorldUser, IdentityRole>(config =>
+            {
+                config.User.RequireUniqueEmail = true;
+                config.Password.RequiredLength = 8;
+                config.Cookies.ApplicationCookie.LoginPath = "/Auth/Login"; //TODO: explore options to integrate with OAuth token
+                config.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents
+                {
+                    OnRedirectToLogin = async ctx =>
+                    {
+                        if(ctx.Request.Path.StartsWithSegments("/api") &&
+                        ctx.Response.StatusCode == 200)
+                        {
+                            ctx.Response.StatusCode = 401;
+                        }
+                        else
+                        {
+                            ctx.Response.Redirect(ctx.RedirectUri);
+                        }
+
+                        await Task.Yield();
+                    }
+
+                };
+            })
+            .AddEntityFrameworkStores<WorldContext>();
 
         }
 
@@ -93,6 +129,8 @@ namespace BigTree
             //UseStaticFiles needs to be called after the default files is attained
             //app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            app.UseIdentity();
 
             app.UseMvc(Configure =>
             {

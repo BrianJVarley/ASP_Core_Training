@@ -18,9 +18,9 @@ namespace BigTree.Models
             _logger = logger;
         }
 
-        public void AddStop(string tripName, Stop newStop)
+        public void AddStop(string tripName, Stop newStop, string userName)
         {
-            var trip = GetTripByName(tripName);
+            var trip = GetTripByName(tripName, userName);
 
             if(trip != null)
             {
@@ -29,6 +29,8 @@ namespace BigTree.Models
                 _context.Stops.Add(newStop);
             }
         }
+
+
 
         public void AddTrip(Trip trip)
         {
@@ -50,9 +52,29 @@ namespace BigTree.Models
                 .FirstOrDefault();
         }
 
+        public Trip GetTripByUserName(string name)
+        {
+            return _context
+                .Trips
+                .Include(t => t.Stops)
+                .Where(t => t.UserName == name)
+                .ToList();
+        }
+
+        public Trip GetUserTripByName(string tripName, string name)
+        {
+            return _context
+                .Trips
+                .Include(t => t.Stops)
+                .Where(t => t.Name == tripName && t.UserName == name)
+                .ToList();
+        }
+
         public async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync()) > 0;
         }
+
+     
     }
 }

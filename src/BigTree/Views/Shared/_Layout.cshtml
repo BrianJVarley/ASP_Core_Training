@@ -20,12 +20,24 @@
 
 
     <div id="sidebar">
-        <img src="~/Images/user-1.jpg" alt="headshot user" class="headshot" />
-        <span id="username">Brian Varley</span>
+        @if (User.Identity.IsAuthenticated)
+        {
+
+            <img src="~/Images/user-1.jpg" alt="headshot user" class="headshot" />
+            <span id="username">@User.Identity.Name</span>
+        }
+
         <ul class="nav">
             <li class="active"><a asp-controller="App" asp-action="Index">Home</a></li>
             <li><a asp-controller="App" asp-action="About">About</a></li>
             <li><a asp-controller="App" asp-action="Contact">Contact</a></li>
+            @if (User.Identity.IsAuthenticated)
+            {
+
+                <li><a asp-controller="App" asp-action="Trips">Trips</a></li>
+                <li><a asp-controller="App" asp-action="Logout">Logout</a></li>
+            }
+           
 
         </ul>
 
@@ -59,12 +71,12 @@
         </nav>
         <div id="main" class="container-fluid">
             <div>
-              
+
             </div>
-            @RenderBody();
+            @RenderBody()
         </div>
         <div id="footer" class="container-fluid">
-            <div class="navbar navbar-inverse navbar-fixed-bottom" >
+            <div class="navbar navbar-inverse navbar-fixed-bottom">
                 <h4 class="text-info text-center">&copy; 2015 The World Ltd</h4>
             </div>
         </div>

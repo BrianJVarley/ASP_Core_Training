@@ -6,6 +6,7 @@ using BigTree.Models;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -36,19 +37,29 @@ namespace BigTree.Controllers.Web
         public IActionResult Index()
         {
 
+            return View();
+        }
+
+
+        [Authorize]
+        // GET: /<controller>/
+        public IActionResult Trips()
+        {
+
             try
             {
                 var data = _repository.GetAllTrips();
                 return View(data);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Failed to get trips in Index page: {ex.Message}");
                 return Redirect("/error");
             }
-           
+
         }
+
 
         public IActionResult Contact()
         {
