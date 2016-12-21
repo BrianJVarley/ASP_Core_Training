@@ -20,7 +20,7 @@ namespace BigTree.Models
 
         public void AddStop(string tripName, Stop newStop, string userName)
         {
-            var trip = GetTripByName(tripName, userName);
+            var trip = GetUserTripByName(tripName, userName);
 
             if(trip != null)
             {
@@ -52,7 +52,7 @@ namespace BigTree.Models
                 .FirstOrDefault();
         }
 
-        public Trip GetTripByUserName(string name)
+        public IEnumerable<Trip> GetTripByUserName(string name)
         {
             return _context
                 .Trips
@@ -67,7 +67,7 @@ namespace BigTree.Models
                 .Trips
                 .Include(t => t.Stops)
                 .Where(t => t.Name == tripName && t.UserName == name)
-                .ToList();
+                .FirstOrDefault();
         }
 
         public async Task<bool> SaveChangesAsync()
@@ -75,6 +75,6 @@ namespace BigTree.Models
             return (await _context.SaveChangesAsync()) > 0;
         }
 
-     
+       
     }
 }
