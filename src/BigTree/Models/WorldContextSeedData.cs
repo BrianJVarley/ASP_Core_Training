@@ -22,25 +22,28 @@ namespace BigTree.Models
         public async Task EnsureSeedData()
         {
 
-            if(_userManager.FindByEmailAsync("brianvarley9@gmail.com") == null)
+            try
             {
-                var user = new WorldUser()
+                if (_userManager.FindByEmailAsync("brianvarley9@gmail.com") == null)
                 {
-                    UserName = "brianvarley",
-                    Email = "brianvarley9@gmail.com"
+                    var user = new WorldUser()
+                    {
+                        UserName = "brianvarley",
+                        Email = "brianvarley9@gmail.com",
+                        FirstTrip = DateTime.UtcNow
 
-                };
-            }
+                    };
+                }
 
-            if(!_context.Trips.Any())
-            {
-
-                var usTrip = new Trip()
+                if (!_context.Trips.Any())
                 {
-                    DateCreated = DateTime.UtcNow,
-                    Name = "US Trip",
-                    UserName = "brianvarley",
-                    Stops = new List<Stop>()
+
+                    var usTrip = new Trip()
+                    {
+                        DateCreated = DateTime.UtcNow,
+                        Name = "US Trip",
+                        UserName = "brianvarley",
+                        Stops = new List<Stop>()
                     {
                         new Stop() {  Name = "Atlanta, GA", Arrival = new DateTime(2014, 6, 4), Latitude = 33.748995, Longitude = -84.387982, Order = 0 },
                         new Stop() {  Name = "New York, NY", Arrival = new DateTime(2014, 6, 9), Latitude = 40.712784, Longitude = -74.005941, Order = 1 },
@@ -53,18 +56,18 @@ namespace BigTree.Models
                     }
 
 
-                };
+                    };
 
-                _context.Trips.Add(usTrip);
-                _context.Stops.AddRange(usTrip.Stops);
+                    _context.Trips.Add(usTrip);
+                    _context.Stops.AddRange(usTrip.Stops);
 
 
-                var worldTrip = new Trip()
-                {
-                    DateCreated = DateTime.UtcNow,
-                    Name = "World Trip",
-                    UserName = "",
-                    Stops = new List<Stop>()
+                    var worldTrip = new Trip()
+                    {
+                        DateCreated = DateTime.UtcNow,
+                        Name = "World Trip",
+                        UserName = "",
+                        Stops = new List<Stop>()
                     {
                             new Stop() { Order = 0, Latitude =  33.748995, Longitude =  -84.387982, Name = "Atlanta, Georgia", Arrival = DateTime.Parse("Jun 3, 2014") },
                             new Stop() { Order = 1, Latitude =  48.856614, Longitude =  2.352222, Name = "Paris, France", Arrival = DateTime.Parse("Jun 4, 2014") },
@@ -127,13 +130,22 @@ namespace BigTree.Models
                     }
 
 
-                };
+                    };
 
-                _context.Trips.Add(worldTrip);
-                _context.Stops.AddRange(worldTrip.Stops);
+                    _context.Trips.Add(worldTrip);
+                    _context.Stops.AddRange(worldTrip.Stops);
 
-                await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
+                }
+
+
             }
+            catch (Exception ex)
+            {
+
+            }
+
+            
         }
 
 

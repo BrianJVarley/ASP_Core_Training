@@ -142,7 +142,7 @@ namespace BigTree
 
             });
 
-            seeder.EnsureSeedData().Wait(); //can't call async within Configure..so use .Wait();
+            seeder.EnsureSeedData().Wait();//can't call async within Configure..so use .Wait();
 
         }
     }

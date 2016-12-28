@@ -20,9 +20,10 @@ namespace BigTree.Controllers.Auth
         }
 
 
+        [HttpGet]
         public IActionResult Login()
         {
-            if(User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Trips", "App"); //already logged in so redirect to trips
             }
@@ -30,6 +31,8 @@ namespace BigTree.Controllers.Auth
 
         }
 
+
+        [HttpPost]
         public async Task<ActionResult> Login(LoginViewModel vm, string returnURL)
         {
             if(ModelState.IsValid)

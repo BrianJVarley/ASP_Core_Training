@@ -41,7 +41,7 @@ namespace BigTree.Controllers.Web
         }
 
 
-        [Authorize]
+        //[Authorize]
         // GET: /<controller>/
         public IActionResult Trips()
         {
