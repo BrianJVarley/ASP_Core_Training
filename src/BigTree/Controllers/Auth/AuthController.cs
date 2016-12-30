@@ -20,7 +20,7 @@ namespace BigTree.Controllers.Auth
         }
 
 
-        [HttpGet]
+       
         public IActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
@@ -38,7 +38,7 @@ namespace BigTree.Controllers.Auth
             if(ModelState.IsValid)
             {
 
-                var signInResult = await _signInManager.PasswordSignInAsync(vm.Username, vm.Password, true, false);
+                var signInResult = await _signInManager.PasswordSignInAsync(vm.UserName, vm.Password, true, false);
 
                 if(signInResult.Succeeded)
                 {

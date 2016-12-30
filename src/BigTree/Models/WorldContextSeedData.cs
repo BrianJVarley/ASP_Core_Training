@@ -33,6 +33,8 @@ namespace BigTree.Models
                         FirstTrip = DateTime.UtcNow
 
                     };
+
+                    await _userManager.CreateAsync(user, "P@ssw0rd!");
                 }
 
                 if (!_context.Trips.Any())
@@ -66,7 +68,7 @@ namespace BigTree.Models
                     {
                         DateCreated = DateTime.UtcNow,
                         Name = "World Trip",
-                        UserName = "",
+                        UserName = "brianvarley",
                         Stops = new List<Stop>()
                     {
                             new Stop() { Order = 0, Latitude =  33.748995, Longitude =  -84.387982, Name = "Atlanta, Georgia", Arrival = DateTime.Parse("Jun 3, 2014") },
