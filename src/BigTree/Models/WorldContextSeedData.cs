@@ -22,8 +22,7 @@ namespace BigTree.Models
         public async Task EnsureSeedData()
         {
 
-            try
-            {
+    
                 if (_userManager.FindByEmailAsync("brianvarley9@gmail.com") == null)
                 {
                     var user = new WorldUser()
@@ -141,11 +140,7 @@ namespace BigTree.Models
                 }
 
 
-            }
-            catch (Exception ex)
-            {
-
-            }
+        
 
             
         }
