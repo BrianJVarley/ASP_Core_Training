@@ -101,8 +101,10 @@ namespace BigTree
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
-            ILoggerFactory loggerFactory, WorldContextSeedData seeder)
+        public async void Configure(IApplicationBuilder app,
+      WorldContextSeedData seeder,
+      ILoggerFactory loggerFactory,
+      IHostingEnvironment env)
         {
 
             Mapper.Initialize(config =>
@@ -142,7 +144,7 @@ namespace BigTree
 
             });
 
-            seeder.EnsureSeedData().Wait();//can't call async within Configure..so use .Wait();
+            await seeder.EnsureSeedDataAsync();
 
         }
     }
