@@ -109,3 +109,8 @@ input[type=text], input[type=password], textarea {
         transition: margin-left ease .25s;
 
     }
+
+#map {
+    width: 100%;
+    height: 600px;
+}
