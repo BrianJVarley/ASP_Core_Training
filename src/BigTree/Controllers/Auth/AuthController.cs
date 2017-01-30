@@ -65,14 +65,12 @@ namespace BigTree.Controllers.Auth
 
         public async Task<ActionResult> Logout()
         {
-
-            if(User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated)
             {
                 await _signInManager.SignOutAsync();
             }
 
             return RedirectToAction("Index", "App");
-
         }
     }
 }

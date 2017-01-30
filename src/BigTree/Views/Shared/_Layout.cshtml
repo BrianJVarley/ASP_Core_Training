@@ -8,9 +8,7 @@
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/bootswatch/yeti/bootstrap.min.css" />
-
     <link rel="stylesheet" href="~/lib/Font-Awesome/css/font-awesome.min.css" />
-
     <link rel="stylesheet" href="~/CSS/Site.css" />
 
 
@@ -35,7 +33,7 @@
             {
 
                 <li><a asp-controller="App" asp-action="Trips">Trips</a></li>
-                <li><a asp-controller="App" asp-action="Logout">Logout</a></li>
+                <li><a asp-controller="Auth" asp-action="Logout">Logout</a></li>
             }
            
 
@@ -56,11 +54,11 @@
                 </ul>
                 <a asp-controller="App" asp-action="Index" class="navbar-brand">The World</a>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
+                    @*<li>
                         <a href="#" class="btn btn-sm btn-info">
                             <i class="fa fa-save"></i>Save
                         </a>
-                    </li>
+                    </li>*@
                     <li>
                         <a href="#" class="btn btn-sm btn-info">
                             <i class="fa fa-print"></i>Print
