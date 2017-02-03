@@ -20,9 +20,9 @@ gulp minify
 ```
 
 -----------------------------
-Sample API requests (localhost dependent):
+API Endpoints (localhost dependent):
 
-http://localhost:57916/api/trips
+[Trips](http://localhost:57916/api/trips)
 
 --------------------------------
 
