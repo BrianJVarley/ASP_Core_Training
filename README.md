@@ -13,11 +13,27 @@ Updating the Database Migration:
 ```javascript
 dotet ef database update
 ```
-
-Build the minified dist files:
+Minify js files:
 ```javascript
 gulp minify
 ```
+
+Change Environment Variable:
+```javascript
+set ASPNETCORE-ENVIRONMENT=Testing
+```
+
+Publish project:
+```javascript
+dotnet publish -o <YOURDIRECTORY> 
+```
+
+
+Build project DLL:
+```javascript
+dotnet BigTree
+```
+
 
 -----------------------------
 API Endpoints (localhost dependent):
