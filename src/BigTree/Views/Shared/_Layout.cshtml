@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="~/lib/Font-Awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="~/CSS/Site.css" />
 
+    
 
 </head>
 
@@ -35,7 +36,7 @@
                 <li><a asp-controller="App" asp-action="Trips">Trips</a></li>
                 <li><a asp-controller="Auth" asp-action="Logout">Logout</a></li>
             }
-           
+
 
         </ul>
 
@@ -55,10 +56,10 @@
                 <a asp-controller="App" asp-action="Index" class="navbar-brand">The World</a>
                 <ul class="nav navbar-nav navbar-right">
                     @*<li>
-                        <a href="#" class="btn btn-sm btn-info">
-                            <i class="fa fa-save"></i>Save
-                        </a>
-                    </li>*@
+                            <a href="#" class="btn btn-sm btn-info">
+                                <i class="fa fa-save"></i>Save
+                            </a>
+                        </li>*@
                     <li>
                         <a href="#" class="btn btn-sm btn-info">
                             <i class="fa fa-print"></i>Print
@@ -83,7 +84,14 @@
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" src="~/JS/site.js"></script>
+    @* razr uses the minified js dependent on environment var *@
+    <environment names="Development">
+        <script type="text/javascript" src="~/JS/site.js"></script>
+    </environment>
+    <environment names="Production,Staging">
+        <script type="text/javascript" src="~/lib/_app/site.js"></script>
+    </environment>
+
 
 
     @RenderSection("scripts", false);

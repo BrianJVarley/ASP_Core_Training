@@ -1,0 +1,1 @@
+!function(){var e=$("#sidebar, #wrapper-main"),i=$("#sidebarToggle i.glyphicon");$("#sidebarToggle").on("click",function(){e.toggleClass("hide-sidebar"),e.hasClass("hide-sidebar")?(i.removeClass("glyphicon-chevron-left"),i.addClass("glyphicon-chevron-right")):(i.addClass("glyphicon-chevron-left"),i.removeClass("glyphicon-chevron-right"))})}();

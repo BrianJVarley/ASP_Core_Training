@@ -10,7 +10,7 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
     "Microsoft.NETCore.App": {
-      "type": "platform",
+      //"type": "platform",
       "version": "1.0.0"
     },
     "Microsoft.EntityFrameworkCore": "1.0.0",
@@ -55,14 +55,24 @@
     }
   },
 
+
+  "runtimes": {
+
+    "win81-64": { }
+  },
+
   "publishOptions": {
     "include": [
       "wwwroot",
-      "web.config"
+      "web.config",
+      "Views",
+	    "config.json"
     ]
   },
 
   "scripts": {
-    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ],
+    "prepublish": [ "npm install", "bower install" ],
+    "prepare": "gulp minify"
   }
 }
