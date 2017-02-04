@@ -27,7 +27,14 @@ Publish project:
 ```javascript
 dotnet publish -o <YOURDIRECTORY> 
 ```
+Publish project w/ runtime included:
+```javascript
+dotnet publish -o <YOURDIRECTORY> -r <runtime>
 
+eg,
+
+dotnet publish -o <YOURDIRECTORY> -r win81-64
+```
 
 Build project DLL:
 ```javascript
