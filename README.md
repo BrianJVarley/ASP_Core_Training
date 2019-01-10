@@ -1,5 +1,5 @@
 # ASP_Core_Training
-Training course building a Web App with ASP.NET Core, MVC 6, EF Core, and Angular
+Training course building a Web App with Angular 1.6, ASP.NET Core & Entity Framework.
 
 ---------------------------------------------------------
 Initialise Local Database:
@@ -11,7 +11,7 @@ dotnet ef migrations add InitialDatabase
 Updating the Database Migration:
 
 ```javascript
-dotet ef database update
+dotnet ef database update
 ```
 Minify js files:
 ```javascript
